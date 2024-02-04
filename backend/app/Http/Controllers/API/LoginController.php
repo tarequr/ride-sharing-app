@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\LoginNeedsVerification;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -22,6 +23,9 @@ class LoginController extends Controller
             return response()->json(['message' => 'Could not process a user with that phone number.'], 401);
         }
 
+        $user->notify(new LoginNeedsVerification());
         // reference ->  https://laravel-notification-channels.com/twilio/#contents
+
+        return response()->json(['message' => 'Text message notification sent successfully.']);
     }
 }
