@@ -22,3 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/login/verify', [LoginController::class, 'verify']);
+
+
+Route::get('user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
