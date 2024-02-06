@@ -56,7 +56,13 @@ class TripController extends Controller
 
     public function start(Request $request, Trip $trip)
     {
-        // TODO
+        $trip->update([
+            'is_started' => true
+        ]);
+
+        $trip->load('driver.user');
+
+        return $trip;
     }
 
     public function end(Request $request, Trip $trip)
