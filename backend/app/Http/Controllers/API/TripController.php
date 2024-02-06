@@ -67,11 +67,27 @@ class TripController extends Controller
 
     public function end(Request $request, Trip $trip)
     {
-        // TODO
+        $trip->update([
+            'is_complete' => true
+        ]);
+
+        $trip->load('driver.user');
+
+        return $trip;
     }
 
     public function location(Request $request, Trip $trip)
     {
-        // TODO
+        $request->validate([
+            'driver_location' => 'required'
+        ]);
+
+        $trip->update([
+            'driver_location' => $request->driver_location
+        ]);
+
+        $trip->load('driver.user');
+
+        return $trip;
     }
 }
