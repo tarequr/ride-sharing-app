@@ -62,6 +62,8 @@ class TripController extends Controller
             // -> https://github.com/beyondcode/laravel-websockets
             // -> https://beyondco.de/docs/laravel-websockets/getting-started/introduction/
 
+            // php artisan websockets:serve
+
         return $trip;
     }
 
