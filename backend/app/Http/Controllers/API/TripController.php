@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\TripAccepted;
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -50,6 +51,8 @@ class TripController extends Controller
         ]);
 
         $trip->load('driver.user');
+
+        TripAccepted::dispatch($trip, $request->user());
 
         return $trip;
     }
