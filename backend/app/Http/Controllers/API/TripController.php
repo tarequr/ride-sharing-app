@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\TripAccepted;
+use App\Events\TripEnded;
+use App\Events\TripLocationUpdated;
+use App\Events\TripStarted;
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -54,6 +57,11 @@ class TripController extends Controller
 
         TripAccepted::dispatch($trip, $request->user());
 
+        // Reference
+            // -> https://github.com/soketi/soketi
+            // -> https://github.com/beyondcode/laravel-websockets
+            // -> https://beyondco.de/docs/laravel-websockets/getting-started/introduction/
+
         return $trip;
     }
 
@@ -65,6 +73,8 @@ class TripController extends Controller
 
         $trip->load('driver.user');
 
+        TripStarted::dispatch($trip, $request->user());
+
         return $trip;
     }
 
@@ -75,6 +85,8 @@ class TripController extends Controller
         ]);
 
         $trip->load('driver.user');
+
+        TripEnded::dispatch($trip, $request->user());
 
         return $trip;
     }
@@ -88,6 +100,8 @@ class TripController extends Controller
         $trip->update([
             'driver_location' => $request->driver_location
         ]);
+
+        TripLocationUpdated::dispatch($trip, $request->user());
 
         $trip->load('driver.user');
 
