@@ -3,12 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div class="max-w-3xl mx-auto bg-green-200 text-center">
-      <h1>Hello Tailwind!</h1>
+    <div class="min-h-screen bg-gray-100 text-center antialiased">
+      <RouterView />
+      
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
