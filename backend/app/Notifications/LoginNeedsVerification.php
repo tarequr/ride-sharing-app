@@ -40,7 +40,7 @@ class LoginNeedsVerification extends Notification
         ]);
 
         return (new TwilioSmsMessage())
-            ->content("Your sabbir login code is {$loginCode}, don't share this with anyone!");
+            ->content("Your login code is {$loginCode}, don't share this with anyone!");
     }
 
     /**
