@@ -14,6 +14,7 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@fawmi/vue-google-maps": "^0.9.79",
     "@vitejs/plugin-vue": "^5.0.3",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.7",
