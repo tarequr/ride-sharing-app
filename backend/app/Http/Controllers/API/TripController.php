@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\TripAccepted;
+use App\Events\TripCreated;
 use App\Events\TripEnded;
 use App\Events\TripLocationUpdated;
 use App\Events\TripStarted;
@@ -20,11 +21,15 @@ class TripController extends Controller
             'destination_name' => 'required'
         ]);
 
-        return $request->user()->trips()->create($request->only([
+        $trip = $request->user()->trips()->create($request->only([
             'origin',
             'destination',
             'destination_name'
         ]));
+
+        TripCreated::dispatch($trip, $request->user());
+
+        return $trip;
     }
 
     public function show(Request $request, Trip $trip)
@@ -55,7 +60,7 @@ class TripController extends Controller
 
         $trip->load('driver.user');
 
-        TripAccepted::dispatch($trip, $request->user());
+        TripAccepted::dispatch($trip, $trip->user);
 
         // Reference
             // -> https://github.com/soketi/soketi
