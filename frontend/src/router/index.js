@@ -80,7 +80,7 @@ router.beforeEach((to, from) => {
 
 const checkTokenAuthenticity = () => {
     axios
-        .get('http://localhost:8000/api/user', {
+        .get(`${import.meta.env.VITE_API_KEY_URL}/api/user`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

@@ -30,7 +30,7 @@ const getFormattedCredentials = () => {
 
 const handleLogin = () => {
     axios
-        .post('http://127.0.0.1:8000/api/login', {
+        .post(`${import.meta.env.VITE_API_KEY_URL}/api/login`, {
             phone: credentials.phone.replaceAll(' ', '').replace('-', ''),
         })
         .then((reponse) => {
@@ -45,7 +45,7 @@ const handleLogin = () => {
 const handleVerification = () => {
     axios
         .post(
-            'http://127.0.0.1:8000/api/login/verify',
+            `${import.meta.env.VITE_API_KEY_URL}/api/login/verify`,
             getFormattedCredentials()
         )
         .then((response) => {
